@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 21:10:31 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 18:39:41 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 19:33:00 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,16 @@ char			**create_padded_square(t_window *window)
 int				is_valid_map(t_window *window, int x, int y, int *visited)
 {
 	int			i;
-	int			dx[4];
-	int			dy[4];
+	int			*dx;
+	int			*dy;
 	t_pos		to;
 
 	if (x <= 0 || x >= window->cub->m_r + 1
 		|| y <= 0 || y >= window->cub->m_c + 2)
 		return (0);
 	visited[y * (window->cub->m_r + 2) + x] = 1;
-	init_vector_arrow(dx, dy);
+	dx = (int[4]){1, -1, 0, 0};
+	dy = (int[4]){0, 0, -1, 1};
 	if (window->max_pad[x][y] == ' ')
 		return (0);
 	i = -1;
@@ -91,10 +92,8 @@ int				is_valid_map(t_window *window, int x, int y, int *visited)
 		if (0 <= to.x && to.x < window->cub->m_r + 2 && 0 <= to.y &&
 		to.y < window->cub->m_c + 3 && window->max_pad[to.x][to.y] != '1' &&
 		!visited[to.y * (window->cub->m_r + 2) + to.x])
-		{
 			if (!is_valid_map(window, to.x, to.y, visited))
 				return (0);
-		}
 	}
 	return (1);
 }
