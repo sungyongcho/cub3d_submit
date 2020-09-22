@@ -6,13 +6,13 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:16:58 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/16 16:24:02 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 18:39:41 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	set_int_in_char(unsigned char *start, int value)
+void					set_int_in_char(unsigned char *start, int value)
 {
 	start[0] = (unsigned char)(value);
 	start[1] = (unsigned char)(value >> 8);
@@ -20,9 +20,9 @@ void	set_int_in_char(unsigned char *start, int value)
 	start[3] = (unsigned char)(value >> 24);
 }
 
-void	write_bmp_header(t_window *window, int fd, int size)
+void					write_bmp_header(t_window *window, int fd, int size)
 {
-	unsigned char	header[54];
+	unsigned char		header[54];
 
 	ft_memset(header, 0, 54);
 	header[0] = (unsigned char)'B';
@@ -37,14 +37,14 @@ void	write_bmp_header(t_window *window, int fd, int size)
 	write(fd, header, 54);
 }
 
-void	write_data(t_window *window, int fd)
+void					write_data(t_window *window, int fd)
 {
 	const unsigned char	zero[3] = {0, 0, 0};
 	int					i;
 	int					j;
 	int					pad;
 
-	i = window->cub->res_h-1;
+	i = window->cub->res_h - 1;
 	pad = (4 - (window->cub->res_w * 3) % 4) % 4;
 	while (i >= 0)
 	{
@@ -60,16 +60,27 @@ void	write_data(t_window *window, int fd)
 	}
 }
 
-int		save_bmp(t_window *window)
+int						save_bmp(t_window *window)
 {
-	int	fd;
-	int	size;
+	int					fd;
+	int					size;
 
 	size = 54 + 3 * window->cub->res_w * window->cub->res_h;
-	if ((fd = open("./screenshot.bmp", O_WRONLY | O_CREAT |\
+	if ((fd = open("./screenshot.bmp", O_WRONLY | O_CREAT |
 						O_TRUNC | O_APPEND, 00755)) < 0)
 		return (0);
 	write_bmp_header(window, fd, size);
 	write_data(window, fd);
 	return (1);
+}
+
+void					bmp_mode(t_window *window, char *path)
+{
+	init_window(window, path);
+	init_temp(window);
+	init_sprite(window);
+	calc(window);
+	draw(window);
+	save_bmp(window);
+	exit(0);
 }

@@ -6,7 +6,7 @@
 #    By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/02 18:03:49 by sucho             #+#    #+#              #
-#    Updated: 2020/09/22 04:47:38 by sucho            ###   ########.fr        #
+#    Updated: 2020/09/22 18:15:50 by sucho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,16 @@ INCLIB_MMS				=	-L${MINILIBX_MMS} -lmlx -framework Cocoa -framework Metal \
 SRCS					=	./includes/get_next_line/get_next_line.c \
 							./srcs/main.c \
 							./srcs/init.c \
+							./srcs/init_vector.c \
 							./srcs/cub_parse.c \
 							./srcs/cub_parse_path.c \
+							./srcs/cub_parse_news.c \
 							./srcs/cub_parse_map.c \
+							./srcs/cub_set_player.c \
 							./srcs/raycast_wall.c \
 							./srcs/raycast_rest.c \
-							./srcs/key.c \
+							./srcs/key_wasd.c \
+							./srcs/key_lr.c \
 							./srcs/bmp.c \
 							./srcs/map_validity.c \
 							./srcs/error_process.c
@@ -67,4 +71,4 @@ fclean: 					clean
 
 re: 						fclean all
 
-.PHONY: 					test bonus all clean fclean re
+.PHONY: 					all clean fclean re

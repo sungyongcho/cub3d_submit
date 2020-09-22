@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 15:27:36 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 04:59:15 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 18:39:43 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,38 +47,20 @@ void	cub_parse_map(t_cub *cub, char **line, int line_count)
 	}
 }
 
-void	cub_set_player(t_window *window, char pos, int i, int j)
+void	map_pre_validity(t_window *window, int i, int j)
 {
-	window->posX = i + 0.5;
-	window->posY = j + 0.5;
-	if (pos == 'N')
+	if (!(ft_strchr("NEWS 012", (char)window->cub->map[i][j])))
+		print_error_and_exit("Invalid .cub file; contains invalid char.");
+	else if (ft_strchr("NEWS", (char)window->cub->map[i][j]))
 	{
-		window->dirX = -1;
-		window->dirY = 0;
-		window->planeX = 0;
-		window->planeY = 0.66;
+		if (window->cub->player_check == 1)
+			print_error_and_exit("Invalid .cub file; check player pos.");
+		window->cub->player_check = 1;
+		cub_set_player(window, (char)window->cub->map[i][j], i, j);
+		window->cub->map[i][j] = '0';
 	}
-	if (pos == 'E')
-	{
-		window->dirX = 0;
-		window->dirY = -1;
-		window->planeX = -0.66;
-		window->planeY = 0;
-	}
-	if (pos == 'W')
-	{
-		window->dirX = 0;
-		window->dirY = 1;
-		window->planeX = 0.66;
-		window->planeY = 0;
-	}
-	if (pos == 'S')
-	{
-		window->dirX = 1;
-		window->dirY = 0;
-		window->planeX = 0;
-		window->planeY = -0.66;
-	}
+	if (window->cub->map[i][j] == '2')
+		window->cub->sprite_count++;
 }
 
 void	cub_map_checkout(t_window *window)
@@ -87,29 +69,18 @@ void	cub_map_checkout(t_window *window)
 	int		j;
 
 	i = 0;
-	while (i < window->cub->map_row)
+	while (i < window->cub->m_r)
 	{
 		j = 0;
 		while (window->cub->map[i][j])
 		{
-			if (!(ft_strchr("NEWS 012", (char)window->cub->map[i][j])))
-				print_error_and_exit("Invalid .cub file; contains invalid char.");
-			else if (ft_strchr("NEWS", (char) window->cub->map[i][j]))
-			{
-				if (window->cub->player_check == 1)
-					print_error_and_exit("Invalid .cub file; check player pos.");
-				window->cub->player_check = 1;
-				cub_set_player(window, (char) window->cub->map[i][j], i, j);
-				window->cub->map[i][j] = '0';
-			}
-			if (window->cub->map[i][j] == '2')
-				window->cub->sprite_count++;
+			map_pre_validity(window, i, j);
 			j++;
 		}
 		i++;
 	}
 	if (!window->cub->player_check)
-		print_error_and_exit("Invalid .cub file; check player position");
+		print_error_and_exit("Invalid .cub file; player pos. n/a");
 }
 
 void	cub_save_sprite(t_window *window)
@@ -118,11 +89,12 @@ void	cub_save_sprite(t_window *window)
 	int		j;
 	int		sprite_count;
 
-	if (!(window->sprite = (t_sprite *)malloc(sizeof(t_sprite) * window->cub->sprite_count)))
+	if (!(window->sprite =
+		(t_sprite *)malloc(sizeof(t_sprite) * window->cub->sprite_count)))
 		return ;
 	sprite_count = 0;
 	i = 0;
-	while (i < window->cub->map_row)
+	while (i < window->cub->m_r)
 	{
 		j = 0;
 		while (window->cub->map[i][j])
