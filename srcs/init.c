@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 14:54:22 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/23 06:21:41 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/23 06:23:32 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void		init_window(t_window *window, char *path)
 		? window->cub->res_w : mx_width;
 	window->cub->res_h = (window->cub->res_h < mx_height)
 		? window->cub->res_h : mx_height;
+	printf("mx: %d\t%d\n",mx_width, mx_height);
+	printf("%d\t%d\n",window->cub->res_w, window->cub->res_h);
 	window->win = mlx_new_window(window->mlx,
 							window->cub->res_w, window->cub->res_h, "cub3D");
 	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_h)))
