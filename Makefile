@@ -6,7 +6,7 @@
 #    By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/02 18:03:49 by sucho             #+#    #+#              #
-#    Updated: 2020/09/22 18:15:50 by sucho            ###   ########.fr        #
+#    Updated: 2020/09/23 05:54:37 by sucho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRCS					=	./includes/get_next_line/get_next_line.c \
 							./srcs/key_lr.c \
 							./srcs/bmp.c \
 							./srcs/map_validity.c \
-							./srcs/error_process.c
+							./srcs/error_process.c \
+							./srcs/screen_exit.c
 
 OBJS					=	${SRCS:.c=.o}
 
