@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 18:32:45 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/23 06:09:31 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/23 06:16:41 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,6 +298,6 @@ void			check_valid_file(char *filepath);
 */
 
 int				screen_exit(void);
-void			setup_screen_res(int *mx_x, int *mx_y, int res_w, int res_h);
+void			get_screen_res(int *mx_x, int *mx_y);
 
 #endif
