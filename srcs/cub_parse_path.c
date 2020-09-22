@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 15:27:36 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 18:39:44 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 19:46:21 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void		cub_parse_f(t_cub *cub, char **color)
 	int		i;
 	int		j;
 
+	i = 0;
+	while (color[i])
+		i++;
+	if (i != 3)
+		print_error_and_exit("Invalid .cub file; Given color not valid");
 	if (cub->floor_color)
 		print_error_and_exit("Invalid .cub file; check if fields are given");
 	i = 0;
@@ -39,6 +44,11 @@ void		cub_parse_c(t_cub *cub, char **color)
 	int		i;
 	int		j;
 
+	i = 0;
+	while (color[i])
+		i++;
+	if (i != 3)
+		print_error_and_exit("Invalid .cub file; Given color not valid");
 	if (cub->ceiling_color)
 		print_error_and_exit("Invalid .cub file; check if fields are given");
 	i = 0;
