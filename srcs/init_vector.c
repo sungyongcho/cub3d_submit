@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 14:54:22 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 18:39:44 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 19:32:39 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,4 @@ void			init_vector(t_pos *to, int x, int y)
 {
 	to->x = x;
 	to->y = y;
-}
-
-void			init_vector_arrow(int dx[4], int dy[4])
-{
-	dx = (int[4]){1, -1, 0, 0};
-	dy = (int[4]){0, 0, -1, 1};
 }

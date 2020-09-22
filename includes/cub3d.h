@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 18:32:45 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 18:39:45 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 19:33:10 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ void			init_sprite(t_window *window);
 **	init_vector.c
 */
 void			init_vector(t_pos *to, int x, int y);
-void			init_vector_arrow(int dx[4], int dy[4]);
 
 /*
 **	Keyboard Input
