@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 18:32:45 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/23 05:56:19 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/23 06:09:31 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "./get_next_line/get_next_line.h"
 # include "./libft/libft.h"
 # include "./mlx_openGL/mlx.h"
+# include <CoreGraphics/CGDisplayConfiguration.h>
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
@@ -293,9 +294,10 @@ void			print_error_and_exit(char *msg);
 void			check_valid_file(char *filepath);
 
 /*
-**	screen_exit.c
+**	screen_util.c
 */
 
 int				screen_exit(void);
+void			setup_screen_res(int *mx_x, int *mx_y, int res_w, int res_h);
 
 #endif
