@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 14:54:22 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 17:51:29 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/23 06:13:21 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,15 @@ void		load_texture(t_window *window)
 void		init_window(t_window *window, char *path)
 {
 	int		i;
+	int		mx_width;
+	int		mx_height;
 
 	window->mlx = mlx_init();
 	if (!(window->cub = (t_cub *)malloc(sizeof(t_cub))))
 		return ;
 	cub_read_file(window, path);
+	setup_screen_res(&mx_width, &mx_height,
+				window->cub->res_w, window->cub->res_h);
 	window->win = mlx_new_window(window->mlx,
 							window->cub->res_w, window->cub->res_h, "cub3D");
 	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_h)))
