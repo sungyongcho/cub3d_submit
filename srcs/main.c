@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 09:50:32 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 10:37:38 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/23 05:55:25 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int				main(int argc, char **argv)
 		init_sprite(window);
 		mlx_loop_hook(window->mlx, main_loop, window);
 		mlx_hook(window->win, X_EVENT_KEY_PRESS, 1, key_press, window);
+		mlx_hook(window->win, X_EVENT_KEY_EXIT, 1L << 5, screen_exit, window);
 		mlx_loop(window->mlx);
 	}
 	else if (argc == 3 && ft_strncmp(argv[2], "--save", 6) == 0)

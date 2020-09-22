@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 18:32:45 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 19:33:10 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/23 05:56:19 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,5 +291,11 @@ void			check_map_valid(t_window *window, double pos_x, double pos_y);
 
 void			print_error_and_exit(char *msg);
 void			check_valid_file(char *filepath);
+
+/*
+**	screen_exit.c
+*/
+
+int				screen_exit(void);
 
 #endif
