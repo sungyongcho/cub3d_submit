@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 14:54:22 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/23 06:23:32 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/23 06:25:18 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		init_window(t_window *window, char *path)
 	printf("mx: %d\t%d\n",mx_width, mx_height);
 	printf("%d\t%d\n",window->cub->res_w, window->cub->res_h);
 	window->win = mlx_new_window(window->mlx,
-							window->cub->res_w, window->cub->res_h, "cub3D");
+							window->cub->res_w, window->cub->res_h - 50, "cub3D");
 	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_h)))
 		return ;
 	i = -1;
