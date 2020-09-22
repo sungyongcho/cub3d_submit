@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 16:00:44 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/08 15:32:40 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 08:34:20 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,22 @@ char					*ft_substr(char const *s,
 	return (result);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char					*ft_strjoin(char const *s1, char const *s2)
 {
-	int		i;
-	char	*tmp;
+	int					i;
+	char				*tmp;
 
-	if (!(tmp = (char *)malloc(sizeof(char *) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
-		return(0);
+	if (!(tmp =
+		(char *)malloc(sizeof(char *) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+		return (0);
 	i = 0;
-		while (*s1)
-			tmp[i++] = *s1++;
-		while (*s2)
-			tmp[i++] = *s2++;
-		tmp[i] = '\0';
-		return (tmp);
+	while (*s1)
+		tmp[i++] = *s1++;
+	while (*s2)
+		tmp[i++] = *s2++;
+	tmp[i] = '\0';
+	return (tmp);
 }
-
 
 char					*ft_strdup(const char *s1)
 {

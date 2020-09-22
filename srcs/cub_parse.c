@@ -6,37 +6,36 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 15:27:36 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/17 12:2 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 18:39:44 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <stdio.h>
-void	free_2d_char(char **ptr)
+
+void		free_2d_char(char **ptr)
 {
-	int i;
+	int		i;
 
 	i = 0;
-	while(*(ptr + i))
+	while (*(ptr + i))
 		free(*(ptr + i++));
 	free(ptr);
 }
 
-char		**cub_read_line(const char *path)
+char		*cub_read_line(const char *path)
 {
 	int		fd;
 	char	*temp;
 	char	*store;
 	char	*line;
-	char	**output;
 
-	if ((fd  = open(path,O_RDONLY)) != 3)
+	if ((fd = open(path, O_RDONLY)) != 3)
 	{
-		perror(ft_strjoin("Error\n",path));
+		perror(ft_strjoin("Error\n", path));
 		exit(1);
 	}
 	store = ft_strdup("");
-	while(get_next_line(fd, &line))
+	while (get_next_line(fd, &line))
 	{
 		temp = ft_strjoin(store, line);
 		free(store);
@@ -47,20 +46,18 @@ char		**cub_read_line(const char *path)
 		free(line);
 	}
 	free(line);
-	output = ft_split(store, '\n');
-	free(store);
 	close(fd);
-	return(output);
+	return (store);
 }
 
-void			init_cub(t_cub *cub)
+void		init_cub(t_cub *cub)
 {
 	cub->res_w = 0;
 	cub->res_h = 0;
 	cub->floor_color = 0;
 	cub->ceiling_color = 0;
-	cub->map_row = 0;
-	cub->max_col = 0;
+	cub->m_r = 0;
+	cub->m_c = 0;
 	cub->sprite_count = 0;
 	cub->no_path = "";
 	cub->so_path = "";
@@ -70,41 +67,45 @@ void			init_cub(t_cub *cub)
 	cub->player_check = 0;
 }
 
-void			cub_count_max_column(t_cub *cub)
+void		cub_count_max_column(t_cub *cub)
 {
-	int i = 0;
-	int max_col;
+	int		i;
+	int		m_c;
 
-	max_col = 0;
-	while (i < cub->map_row)
+	m_c = 0;
+	i = 0;
+	while (i < cub->m_r)
 	{
-		if(max_col < (int)ft_strlen(cub->map[i]))
+		if (m_c < (int)ft_strlen(cub->map[i]))
 		{
-			max_col = (int)ft_strlen(cub->map[i]);
+			m_c = (int)ft_strlen(cub->map[i]);
 		}
 		i++;
 	}
-	cub->max_col = max_col;
+	cub->m_c = m_c;
 }
 
-void			cub_read_file(t_window *window, const char *path)
+void		cub_read_file(t_window *window, const char *path)
 {
+	char	*cub_oneline;
 	char	**cub_temp;
-	int		map_row_count;
+	int		m_r_count;
 
 	init_cub(window->cub);
-	cub_temp = cub_read_line(path);
-	map_row_count = 0;
-	while(*(cub_temp + map_row_count))
-		map_row_count++;
-	map_row_count-=8;
-	window->cub->map_row = map_row_count;
+	cub_oneline = cub_read_line(path);
+	cub_temp = ft_split(cub_oneline, '\n');
+	m_r_count = 0;
+	while (*(cub_temp + m_r_count))
+		m_r_count++;
+	m_r_count -= 8;
+	window->cub->m_r = m_r_count;
 	cub_parse_top_eight(window->cub, cub_temp);
-	cub_parse_map(window->cub, (cub_temp + 8), map_row_count);
+	cub_parse_map(window->cub, (cub_temp + 8), m_r_count);
 	cub_count_max_column(window->cub);
 	cub_map_checkout(window);
 	cub_save_sprite(window);
-	check_map_validity(window, window->posX, window->posY);
+	check_map_valid(window, window->pos_x, window->pos_y);
+	free(cub_oneline);
 	free_2d_char(cub_temp);
 	cub_temp = NULL;
 }

@@ -6,38 +6,51 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 14:54:22 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 04:33:15 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/22 17:51:29 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	load_image(t_window *window, int texture_index, char *path, t_img *img)
+void		load_image(t_window *window, int i, char *path, t_img *img)
 {
-	img->img = mlx_xpm_file_to_image(window->mlx, path, &img->width, &img->height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	window->texture_size[texture_index].x = img->width;
-	window->texture_size[texture_index].y = img->height;
-	if (!(window->texture[texture_index] = (int *)malloc(sizeof(int) * (img->width * img->height))))
-			return ;
-	for (int y = 0; y < img->height; y++)
+	int		x;
+	int		y;
+
+	img->img =
+		mlx_xpm_file_to_image(window->mlx, path, &img->width, &img->height);
+	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
+		&img->size_l, &img->endian);
+	window->texture_size[i].x = img->width;
+	window->texture_size[i].y = img->height;
+	if (!(window->texture[i] =
+		(int *)malloc(sizeof(int) * (img->width * img->height))))
+		return ;
+	y = 0;
+	while (y < img->height)
 	{
-		for (int x = 0; x < img->width; x++)
+		x = 0;
+		while (x < img->width)
 		{
-			window->texture[texture_index][img->width * y + x] = img->data[img->width * y + x];
+			window->texture[i][img->width * y + x] =
+				img->data[img->width * y + x];
+			x++;
 		}
+		y++;
 	}
 	mlx_destroy_image(window->mlx, img->img);
 }
 
-void	load_texture(t_window *window)
+void		load_texture(t_window *window)
 {
 	t_img	temp;
 	int		i;
 
-	if (!(window->texture = (int **)malloc(sizeof(int*) * (TEXTURE_KIND))))
+	if (!(window->texture =
+		(int **)malloc(sizeof(int*) * (TEXTURE_KIND))))
 		return ;
-	if (!(window->texture_size = (t_pos *)malloc(sizeof(t_pos) * (TEXTURE_KIND))))
+	if (!(window->texture_size =
+		(t_pos *)malloc(sizeof(t_pos) * (TEXTURE_KIND))))
 		return ;
 	i = 0;
 	load_image(window, i++, window->cub->no_path, &temp);
@@ -46,9 +59,10 @@ void	load_texture(t_window *window)
 	load_image(window, i++, window->cub->ea_path, &temp);
 	load_image(window, i, window->cub->sprite_path, &temp);
 }
-void	init_window(t_window *window, char *path)
+
+void		init_window(t_window *window, char *path)
 {
-	int	i;
+	int		i;
 
 	window->mlx = mlx_init();
 	if (!(window->cub = (t_cub *)malloc(sizeof(t_cub))))
@@ -61,27 +75,34 @@ void	init_window(t_window *window, char *path)
 	i = 0;
 	while (i < window->cub->res_h)
 	{
-		if (!(window->buffer[i] = (int *)malloc(sizeof(int) * window->cub->res_w + 1)))
+		if (!(window->buffer[i] =
+			(int *)malloc(sizeof(int) * window->cub->res_w + 1)))
 			return ;
 		i++;
 	}
 	load_texture(window);
 }
 
-void	init_temp(t_window *window)
+void		init_temp(t_window *window)
 {
-	window->moveSpeed = 0.05;
-	window->rotSpeed = 0.05;
-	window->img.img = mlx_new_image(window->mlx, window->cub->res_w, window->cub->res_h);
-	window->img.data = (int *)mlx_get_data_addr(window->img.img, &window->img.bpp, &window->img.size_l, &window->img.endian);
+	window->move_speed = 0.05;
+	window->rot_speed = 0.05;
+	window->img.img =
+		mlx_new_image(window->mlx, window->cub->res_w, window->cub->res_h);
+	window->img.data =
+		(int *)mlx_get_data_addr(window->img.img, &window->img.bpp,
+		&window->img.size_l, &window->img.endian);
 }
 
-void	init_sprite(t_window *window)
+void		init_sprite(t_window *window)
 {
-	if (!(window->z_buffer = (double *)malloc(sizeof(double) * (window->cub->res_w))))
+	if (!(window->z_buffer =
+			(double *)malloc(sizeof(double) * (window->cub->res_w))))
 		return ;
-	if (!(window->spriteOrder = (int *)malloc(sizeof(int) * (window->cub->sprite_count))))
+	if (!(window->sprite_order =
+			(int *)malloc(sizeof(int) * (window->cub->sprite_count))))
 		return ;
-	if (!(window->spriteDistance = (double *)malloc(sizeof(double) * (window->cub->sprite_count))))
+	if (!(window->sprite_dist =
+			(double *)malloc(sizeof(double) * (window->cub->sprite_count))))
 		return ;
 }
