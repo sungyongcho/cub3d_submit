@@ -6,7 +6,7 @@
 #    By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/02 18:03:49 by sucho             #+#    #+#              #
-#    Updated: 2020/09/23 06:06:01 by sucho            ###   ########.fr        #
+#    Updated: 2020/09/24 12:33:42 by sucho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT					=	libft.a
 MINILIBX				=	libmlx.a
 
 CC						=	gcc
-CFLAGS					=	-Wall -Wextra -Werror
+CFLAGS					=	-Wall -Wextra -Werror -O3
 RM						=	rm -f
 
 INCLUDES_PATH			=	./includes/
