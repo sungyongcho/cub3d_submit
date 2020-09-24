@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 14:54:22 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/24 12:31:33 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/24 12:35:31 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		init_window(t_window *window, char *path)
 	{
 		if (!(window->buffer[i] =
 			(int *)malloc(sizeof(int) * window->cub->res_w + 1)))
-				print_error_and_exit("Malloc error");
+			print_error_and_exit("Malloc error");
 	}
 	load_texture(window);
 }
