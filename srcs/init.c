@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 14:54:22 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/23 06:27:53 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/24 12:07:33 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		load_image(t_window *window, int i, char *path, t_img *img)
 	window->texture_size[i].y = img->height;
 	if (!(window->texture[i] =
 		(int *)malloc(sizeof(int) * (img->width * img->height))))
-		return ;
+		print_error_and_exit("Malloc error");
 	y = 0;
 	while (y < img->height)
 	{
@@ -48,10 +48,10 @@ void		load_texture(t_window *window)
 
 	if (!(window->texture =
 		(int **)malloc(sizeof(int*) * (TEXTURE_KIND))))
-		return ;
+		print_error_and_exit("Malloc error");
 	if (!(window->texture_size =
 		(t_pos *)malloc(sizeof(t_pos) * (TEXTURE_KIND))))
-		return ;
+		print_error_and_exit("Malloc error");
 	i = 0;
 	load_image(window, i++, window->cub->no_path, &temp);
 	load_image(window, i++, window->cub->so_path, &temp);
@@ -68,7 +68,7 @@ void		init_window(t_window *window, char *path)
 
 	window->mlx = mlx_init();
 	if (!(window->cub = (t_cub *)malloc(sizeof(t_cub))))
-		return ;
+		print_error_and_exit("Malloc error");
 	cub_read_file(window, path);
 	get_screen_res(&mx_width, &mx_height);
 	window->cub->res_w = (window->cub->res_w < mx_width)
@@ -78,13 +78,13 @@ void		init_window(t_window *window, char *path)
 	window->win = mlx_new_window(window->mlx,
 							window->cub->res_w, window->cub->res_h, "cub3D");
 	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_h)))
-		return ;
+		print_error_and_exit("Malloc error");
 	i = -1;
 	while (++i < window->cub->res_h)
 	{
 		if (!(window->buffer[i] =
 			(int *)malloc(sizeof(int) * window->cub->res_w + 1)))
-			return ;
+				print_error_and_exit("Malloc error");
 	}
 	load_texture(window);
 }
@@ -104,11 +104,11 @@ void		init_sprite(t_window *window)
 {
 	if (!(window->z_buffer =
 			(double *)malloc(sizeof(double) * (window->cub->res_w))))
-		return ;
+		print_error_and_exit("Malloc error");
 	if (!(window->sprite_order =
 			(int *)malloc(sizeof(int) * (window->cub->sprite_count))))
-		return ;
+		print_error_and_exit("Malloc error");
 	if (!(window->sprite_dist =
 			(double *)malloc(sizeof(double) * (window->cub->sprite_count))))
-		return ;
+		print_error_and_exit("Malloc error");
 }

@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 09:50:32 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/23 05:55:25 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/24 12:04:51 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int				main(int argc, char **argv)
 	t_window	*window;
 
 	if (!(window = (t_window *)malloc(sizeof(t_window))))
-		return (0);
+		print_error_and_exit("Malloc error");
 	if (argc == 2)
 	{
 		init_window(window, argv[1]);
@@ -104,9 +104,6 @@ int				main(int argc, char **argv)
 	else if (argc == 3 && ft_strncmp(argv[2], "--save", 6) == 0)
 		bmp_mode(window, argv[1]);
 	else
-	{
 		print_error_and_exit("A .cub file path not given");
-		exit(1);
-	}
 	return (0);
 }

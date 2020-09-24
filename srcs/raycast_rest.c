@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 16:21:08 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 18:30:39 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/24 12:05:51 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void				draw_sprite(t_window *window, int i)
 	int				count;
 
 	if (!(rs = (t_ray_sprite *)malloc(sizeof(t_ray_sprite))))
-		return ;
+		print_error_and_exit("Malloc error");
 	init_ray_sprite(window, rs, i);
 	count = rs->draw_s_x;
 	while (count < rs->draw_e_x)

@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 21:10:31 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 19:33:00 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/24 12:05:38 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ char			**create_padded_square(t_window *window)
 
 	if (!(max_pad =
 		(char **)malloc(sizeof(char *) * (window->cub->m_r + 2))))
-		return (0);
+		print_error_and_exit("Malloc error");
 	i = -1;
 	while (++i < window->cub->m_r + 2)
 	{
 		if (!(max_pad[i] =
 			(char *)malloc(sizeof(char) * (window->cub->m_c + 3))))
-			return (0);
+			print_error_and_exit("Malloc error");
 	}
 	set_top_bot_space(window, max_pad);
 	fill_rest(window, max_pad);
@@ -108,7 +108,7 @@ void			check_map_valid(t_window *window, double pos_x, double pos_y)
 	if (!(visited =
 		(int *)malloc(sizeof(int) * ((window->cub->m_r + 2)
 									* (window->cub->m_c + 3)))))
-		return ;
+		print_error_and_exit("Malloc error");
 	i = 0;
 	while (i < (window->cub->m_r + 2) * (window->cub->m_c + 3))
 		visited[i++] = 0;
