@@ -6,7 +6,7 @@
 /*   By: sucho <sucho@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 15:27:36 by sucho             #+#    #+#             */
-/*   Updated: 2020/09/22 18:39:43 by sucho            ###   ########.fr       */
+/*   Updated: 2020/09/24 12:31:03 by sucho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	cub_parse_map(t_cub *cub, char **line, int line_count)
 	int	space_cnt;
 
 	if (!(cub->map = (char **)malloc(sizeof(char *) * line_count)))
-		return ;
+		print_error_and_exit("Malloc error");
 	i = 0;
 	while (line[i])
 	{
 		space_cnt = (int)ft_strlen(line[i]) - map_count_end_space(line[i]) + 1;
 		if (!(cub->map[i] = (char *)malloc(sizeof(char) * (space_cnt + 1))))
-			return ;
+			print_error_and_exit("Malloc error");
 		ft_strlcpy(cub->map[i], line[i], space_cnt);
 		i++;
 	}
@@ -91,7 +91,7 @@ void	cub_save_sprite(t_window *window)
 
 	if (!(window->sprite =
 		(t_sprite *)malloc(sizeof(t_sprite) * window->cub->sprite_count)))
-		return ;
+		print_error_and_exit("Malloc error");
 	sprite_count = 0;
 	i = 0;
 	while (i < window->cub->m_r)
