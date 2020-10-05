@@ -41,6 +41,7 @@ void				sort_sprites(t_window *window)
 	max = 0;
 	while (i < window->cub->sprite_count - 1)
 	{
+		max = i;
 		j = i + 1;
 		while (j < window->cub->sprite_count)
 		{
